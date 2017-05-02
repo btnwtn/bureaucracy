@@ -155,3 +155,91 @@ const emailValidator = fieldValidator("email");
 // console.log the response
 emailValidator("email@example.com").then(console.log);
 ```
+
+### Usage with React.js
+
+This example does form validation when a field has been blurred.
+
+```js
+import React, { Component } from "react";
+import createValidator from "form-bureaucracy";
+
+const MockAPI = {
+  async doesEmailExist(email) {
+    return new Promise(resolve => setTimeout(resolve(true), 300));
+  }
+};
+
+const rules = {
+  async email(input) {
+    const emailExists = await MockAPI.doesEmailExist(input);
+
+    return [
+      input.length === 0 && "Email is required.",
+      emailExists && "That email is already registered!"
+    ];
+  }
+};
+
+const fieldValidator = createValidator(rules);
+
+class Example extends Component {
+  state = {
+    email: {
+      value: "",
+      errors: []
+    }
+  };
+
+  handleChange = event => {
+    const { name, value } = event.target;
+
+    this.setState(state => {
+      return {
+        [name]: {
+          ...state[name],
+          value
+        }
+      };
+    });
+  };
+
+  handleBlur = event => {
+    const name = event.target.name;
+    const validator = fieldValidator(name);
+
+    validator(this.state[name].value).then(errors => {
+      this.setState(state => {
+        return {
+          [name]: {
+            ...state[name],
+            errors
+          }
+        };
+      });
+    });
+  };
+
+  render() {
+    return (
+      <form style={{ margin: "0 auto", maxWidth: "420px" }}>
+        <label>
+          Email:
+          <input
+            type="email"
+            name="email"
+            value={this.state.email.value}
+            onChange={this.handleChange}
+            onBlur={this.handleBlur}
+          />
+        </label>
+        {this.state.email.errors.map(error => (
+          <p key={error.replace(" ", "-")} style={{ color: "red" }}>{error}</p>
+        ))}
+      </form>
+    );
+  }
+}
+
+export default Example;
+```
