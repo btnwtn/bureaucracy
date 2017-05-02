@@ -64,7 +64,7 @@ const rules = {
   email: email => {
     return [
       email.length === 0 && "Email address is required.",
-      !email.includes("@") && `Emaill address must include an '@' symbol.`
+      !email.includes("@") && `Email address must include an '@' symbol.`
     ];
   }
 };
@@ -100,7 +100,7 @@ const rules = {
   email: email => {
     return [
       email.length === 0 && "Email address is required.",
-      !email.includes("@") && `Emaill address must include an '@' symbol.`
+      !email.includes("@") && `Email address must include an '@' symbol.`
     ];
   }
 };
