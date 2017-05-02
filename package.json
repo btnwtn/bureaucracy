@@ -12,10 +12,10 @@
     "prepublish": "npm run build"
   },
   "lint-staged": {
-    "src/**/*.js": {
+    "src/**/*.js": [
       "prettier --write",
       "git add"
-    }
+    ]
   },
   "repository": {
     "type": "git",
