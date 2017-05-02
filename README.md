@@ -58,7 +58,7 @@ const validateEmail = email => {
 `createValidator` accepts an Object that maps form inputs to their Validation `Rules`, and returns a `Field Validator` function that accepts a field to validate against. For example, given an input `email`, the `createValidator` call would like this:
 
 ```js
-import { createValidator } from "form-bureaucracy";
+import createValidator from "form-bureaucracy";
 
 const rules = {
   email: email => {
@@ -93,7 +93,7 @@ emailValidator("email@example.com").then(errors => {
 ### Basic Field Validation
 
 ```js
-import { createValidator } from "form-bureaucracy";
+import createValidator from "form-bureaucracy";
 
 // define a set of rules for form fields to be validated against.
 const rules = {
@@ -124,7 +124,7 @@ emailValidator("email@example.com").then(errors => {
 You can return a `Promise` from a `Rule` if you need to make any API calls or do any asynchronous work. 
 
 ```js
-import { createValidator } from "form-bureaucracy";
+import createValidator from "form-bureaucracy";
 
 const MockAPI = {
   doesEmailExist: email => {
