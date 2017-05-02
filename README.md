@@ -1,6 +1,6 @@
 # Form Bureaucracy
 
-> Async form validation helpers.
+> Async form validation.
 
 ## Installing
 
