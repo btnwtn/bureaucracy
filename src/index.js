@@ -34,7 +34,7 @@ const createValidator = rules =>
           });
         }
 
-        return resolve(rejectFalsey(errors));
+        return resolve(rejectFalsey(result));
       });
     };
 
